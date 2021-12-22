@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import './index.css'
 
 const Login = () => {
     const [show, setShow] = useState(false);
@@ -9,10 +15,33 @@ const Login = () => {
     const handleShow = () => setShow(true);
   
     return (
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          Login
-        </Button>
+      <div className="login d-flex justify-content-center align-items-center">
+              <Form className="text-center">
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Email address"
+                    className="mb-3"
+                  >
+                    <Form.Control type="email" placeholder="Enter email" />
+                  </FloatingLabel>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <FloatingLabel controlId="floatingPassword" label="Password">
+                    <Form.Control type="password" placeholder="Password" />
+                  </FloatingLabel>
+                </Form.Group>
+                <Button 
+                  variant="primary" 
+                  //type="submit" 
+                  onClick={handleShow}
+                >
+                  Submit
+                </Button>
+              </Form>
+           
+        
   
         <Modal
           show={show}
@@ -34,7 +63,7 @@ const Login = () => {
             <Button variant="primary">Understood</Button>
           </Modal.Footer>
         </Modal>
-      </>
+      </div>
     );
 }
 
