@@ -32,12 +32,13 @@ const Login = () => {
                     <Form.Control type="password" placeholder="Password" />
                   </FloatingLabel>
                 </Form.Group>
+                <Button variant="outline-primary">Login</Button>{' '}
                 <Button 
                   variant="primary" 
                   //type="submit" 
                   onClick={handleShow}
                 >
-                  Submit
+                  Sign Up
                 </Button>
               </Form>
            
