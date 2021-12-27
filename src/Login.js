@@ -7,12 +7,32 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import './index.css'
+import { login, test } from './utils'
 
 const Login = () => {
     const [show, setShow] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    async function handleSubmit(event) {
+      event.preventDefault()
+      
+      console.log('button clicked')
+      const newUser = await login(username, password)
+      //const something = await test()
+      //console.log(something)
+      //console.log('login comp', newUser)
+      
+      /*if (newUser.username) {
+          setUsername('')
+          setPassword('')
+          setUser(newUser)
+      }*/
+      console.log('newuser', newUser)
+    }
   
     return (
       <div className="login d-flex justify-content-center align-items-center">
@@ -23,16 +43,22 @@ const Login = () => {
                     label="Email address"
                     className="mb-3"
                   >
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => {setUsername(event.target.value)}} />
                   </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <FloatingLabel controlId="floatingPassword" label="Password">
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" onChange={(event) => {setPassword(event.target.value)}} />
                   </FloatingLabel>
                 </Form.Group>
-                <Button variant="outline-primary">Login</Button>{' '}
+                <Button 
+                  variant="outline-primary"
+                  onClick={() => {
+                    handleSubmit(event)
+                  }}>
+                    Login
+                </Button>{' '}
                 <Button 
                   variant="primary" 
                   //type="submit" 
