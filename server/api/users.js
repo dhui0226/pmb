@@ -4,7 +4,6 @@ const { getUser } = require('../db')
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
-    console.log('api users')
 
     try {
         const user = await getUser({username, password})

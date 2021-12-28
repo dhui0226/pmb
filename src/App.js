@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import Login from './Login'
+import { Login, Home } from './components'
 
 const App = () => {
+    const [user, setUser] = useState({})
+
     return (
         <div>
-            <Login />
+            {
+                user.username ? <Home setUser={setUser} /> : <Login setUser={setUser} />
+            }
         </div>
     )
 }

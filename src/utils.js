@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export async function login(username, password) {
-    console.log('utils')
     try {
         const { data } = await axios.post('/api/users/login', {username, password})
 

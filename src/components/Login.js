@@ -6,10 +6,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import './index.css'
-import { login, test } from './utils'
+import './Login.css'
+import { login, test } from '../utils'
 
-const Login = () => {
+const Login = ({setUser}) => {
     const [show, setShow] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -20,8 +20,12 @@ const Login = () => {
     async function handleSubmit(event) {
       event.preventDefault()
       
-      console.log('button clicked')
       const newUser = await login(username, password)
+
+      if (newUser) {
+        setUser(newUser)
+      }
+
       //const something = await test()
       //console.log(something)
       //console.log('login comp', newUser)
@@ -63,9 +67,7 @@ const Login = () => {
                   variant="primary" 
                   //type="submit" 
                   onClick={handleShow}
-                >
-                  Sign Up
-                </Button>
+                >Sign Up</Button>
               </Form>
            
         
