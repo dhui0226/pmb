@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getUser } = require('../db')
+const { createUser, getUser } = require('../db')
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
@@ -10,6 +10,18 @@ router.post('/login', async (req, res) => {
         res.send(user)
     } catch (error) {
         console.error('could not post')
+        throw error
+    }
+})
+
+router.post('/register', async (req, res) => {
+    const {username, password } = req.body
+
+    try {
+        const user = await createUser({username, password})
+
+        res.send(user)
+    } catch (error) {
         throw error
     }
 })

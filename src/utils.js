@@ -3,10 +3,19 @@ import axios from 'axios'
 export async function login(username, password) {
     try {
         const { data } = await axios.post('/api/users/login', {username, password})
-
         return data
     } catch (error) {
         console.error('login fail')
+        throw error
+    }
+}
+
+export async function register(username, password) {
+    try {
+        const { data } = await axios.post('api/users/register', {username, password})
+        return data
+    } catch (error) {
+        console.error('could not create account')
         throw error
     }
 }
