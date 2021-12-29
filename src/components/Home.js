@@ -1,9 +1,11 @@
+import Navbar from './Navbar'
 import Button from 'react-bootstrap/Button'
+import './Home.css'
 
 const Home = ({setUser}) => {
     return (
         <div>
-            <h1>Home Page</h1>
+            <Navbar />
             <Button 
                 variant="outline-primary"
                 onClick={() => {setUser({})}}

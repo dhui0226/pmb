@@ -15,7 +15,7 @@ const Login = ({setUser}) => {
     const handleShow = () => setShow(true);
 
     async function handleSubmit(event, type) {
-      console.log('event', event, type)
+      console.log('event', type)
       event.preventDefault()
 
       var user = null
@@ -26,12 +26,12 @@ const Login = ({setUser}) => {
         user = await register(username, password)
       }
       
-
       if (user) {
-        setUsername('')
-        setPassword('')
         setUser(user)
       }
+
+      setUsername('')
+      setPassword('')
 
       console.log('user', user)
     }
@@ -75,7 +75,7 @@ const Login = ({setUser}) => {
             <Modal.Title>Create Your Account</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form className="text-center">
+            <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <FloatingLabel
                       controlId="floatingInput"
