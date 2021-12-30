@@ -18,21 +18,27 @@ const Login = ({setUser}) => {
       console.log('event', type)
       event.preventDefault()
 
-      var user = null
-
-      if (type === 'login') {
-        user = await login(username, password)
-      } else if (type === 'register') {
-        user = await register(username, password)
+      if (!username || !password) {
+        return
+      } else {
+        try {
+          if (type === 'login') {
+            const user = await login(username, password)
+            setUsername('')
+            setPassword('')
+            setUser(user)
+            console.log('user', user)
+          } else if (type === 'register') {
+            const user = await register(username, password)
+            setUsername('')
+            setPassword('')
+            setUser(user)
+            console.log('user', user)
+          }
+        } catch (error) {
+          throw error
+        }
       }
-      
-      if (user) {
-        setUser(user)
-        setUsername('')
-        setPassword('')
-      }
-
-      console.log('user', user)
     }
   
     return (
@@ -43,13 +49,13 @@ const Login = ({setUser}) => {
                     controlId="floatingInput"
                     label="Email address"
                     className="mb-3">
-                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => {setUsername(event.target.value)}} />
+                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => setUsername(event.target.value)} />
                   </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <FloatingLabel controlId="floatingPassword" label="Password">
-                    <Form.Control type="password" placeholder="Password" onChange={(event) => {setPassword(event.target.value)}} />
+                    <Form.Control type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
                   </FloatingLabel>
                 </Form.Group>
                 <Button 

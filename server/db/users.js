@@ -14,7 +14,6 @@ async function getUser({username, password}) {
     const user = await getUserByUsername(username)
 
     if (user.password === password) {
-        
         return user
     }
 }
@@ -26,7 +25,6 @@ async function getUserByUsername(username) {
         WHERE username = ($1)
     `, [username])
 
-    
     return user
 }
 
