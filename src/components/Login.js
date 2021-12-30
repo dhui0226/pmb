@@ -28,10 +28,9 @@ const Login = ({setUser}) => {
       
       if (user) {
         setUser(user)
+        setUsername('')
+        setPassword('')
       }
-
-      setUsername('')
-      setPassword('')
 
       console.log('user', user)
     }
@@ -55,6 +54,7 @@ const Login = ({setUser}) => {
                 </Form.Group>
                 <Button 
                   variant="outline-primary"
+                  className="o-primary-btn"
                   onClick={() => {
                     handleSubmit(event, 'login')
                   }}>Login</Button>{' '}

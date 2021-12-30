@@ -1,3 +1,18 @@
 .nav {
-    width: 25%;
+    /*position: absolute;*/
+    width: 20%;
+    height: 100%;
+}
+
+.nav-link {
+    color: #834333;
+}
+
+.nav-link:hover {
+    color: #834333;
+}
+
+.nav-item > .nav-link.active {
+    background-color: orange;
+    color: white;
 }

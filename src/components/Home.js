@@ -1,15 +1,13 @@
 import Navbar from './Navbar'
 import Button from 'react-bootstrap/Button'
+import Projects from './Projects'
 import './Home.css'
 
 const Home = ({setUser}) => {
     return (
-        <div>
-            <Navbar />
-            <Button 
-                variant="outline-primary"
-                onClick={() => {setUser({})}}
-            >Logout</Button>{' '}
+        <div className="home">
+            <Navbar setUser={setUser} />
+            <Projects />
         </div>
     )
 }
