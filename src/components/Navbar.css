@@ -16,3 +16,13 @@
     background-color: orange;
     color: white;
 }
+
+.btn-outline-primary {
+    color: #834333;
+    border-color: #834333;
+}
+
+.btn-outline-primary:hover {
+    background-color: orange;
+    border-color: orange;
+}
