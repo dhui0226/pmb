@@ -14,10 +14,7 @@ const Cards = () => {
 
     return (
         <div>
-            <Card 
-                style={{ cursor: "pointer" }}
-                onClick={handleShow}
-            >
+            <Card style={{ cursor: "pointer" }}onClick={handleShow}>
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
                   <Card.Text>
