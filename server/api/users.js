@@ -15,7 +15,7 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    const {username, password } = req.body
+    const { username, password } = req.body
 
     try {
         const user = await createUser({username, password})

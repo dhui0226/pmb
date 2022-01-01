@@ -4,12 +4,12 @@ import Projects from './Projects'
 import MyTasks from './MyTasks'
 import './Home.css'
 
-const Home = ({setUser}) => {
+const Home = ({user, setUser}) => {
     return (
         <div className="home">
             <Navbar setUser={setUser} />
             <Dashboard />
-            <Projects />
+            <Projects user={user} />
             <MyTasks />
         </div>
     )

@@ -8,4 +8,7 @@ router.get('/', (req, res) => {
 const usersRouter = require('./users')
 router.use('/users', usersRouter)
 
+const projectsRouter = require('./projects')
+router.use('/projects', projectsRouter)
+
 module.exports = router

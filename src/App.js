@@ -7,7 +7,7 @@ const App = () => {
     return (
         <div>
             {
-                user.username ? <Home setUser={setUser} /> : <Login setUser={setUser} />
+                user.username ? <Home user={user} setUser={setUser} /> : <Login setUser={setUser} />
             }
         </div>
     )

@@ -3,10 +3,10 @@ import ProjectsInProgress from './ProjectsInProgress'
 import ProjectsCompleted from './ProjectsCompleted'
 import './index.css'
 
-const Projects = () => {
+const Projects = ({user}) => {
     return (
         <div className='projectsContainer'>
-            <ProjectsToDo />
+            <ProjectsToDo user={user} />
             <ProjectsInProgress />
             <ProjectsCompleted />
         </div>
