@@ -3,8 +3,9 @@ const router = express.Router()
 const { createProjects, getProjects } = require('../db')
 
 
-router.get('/todo', async (req, res) => {
-    const { userId } = req.body
+router.get('/:userId', async (req, res) => {
+    const { userId } = req.params
+
     try {
         const projects = await getProjects({userId})
         res.send(projects)

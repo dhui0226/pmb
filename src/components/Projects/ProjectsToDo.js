@@ -7,10 +7,10 @@ const ProjectsToDo = ({user}) => {
 
     useEffect(async () => {
         console.log('usertodo', user)
-        console.log(user.id)
+     
         const projects = await getProjectToDos(user.id)
-        setTodos(projects)
-        console.log('todo', projects)
+        await setTodos(projects)
+        console.log('todo', todos)
     }, [])
 
     return (
@@ -19,7 +19,14 @@ const ProjectsToDo = ({user}) => {
                 To Do
             </h1>
             <Cards />
-            <h1>comehting{todos.title}</h1>
+            {
+                todos.map((thing, idx) => (
+                    <div key={idx}>
+                        <h1>{thing.title}</h1>
+                        <h1>{thing.description}</h1>
+                    </div>
+                ))
+            }
         </div>
     )
 }

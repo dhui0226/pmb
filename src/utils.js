@@ -22,7 +22,7 @@ export async function register(username, password) {
 
 export async function getProjectToDos(userId) {
     try {
-        const { data } = await axios.get('api/projects/todo', {userId})
+        const { data } = await axios.get(`api/projects/${userId}`)
         return data
     } catch (error) {
         console.error('could not get projects')
