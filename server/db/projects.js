@@ -1,11 +1,11 @@
 const client = require('./client')
 
-async function createProject({userId, title, description}) {
+async function createProject({userId, type, title, description}) {
     const { rows } = await client.query(`
-        INSERT INTO "projectsTodo"("userId", title, description)
-        VALUES ($1, $2, $3)
+        INSERT INTO "projectsTodo"("userId", type, title, description)
+        VALUES ($1, $2, $3, $4)
         RETURNING *
-    `, [userId, title, description])
+    `, [userId, type, title, description])
 
     return rows
 }

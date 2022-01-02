@@ -1,6 +1,6 @@
 import Cards from './Cards'
 
-const ProjectsCompleted = () => {
+const ProjectsCompleted = (user={user}) => {
     return (
         <div>
             <h1>

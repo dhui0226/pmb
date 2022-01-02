@@ -7,8 +7,8 @@ const Projects = ({user}) => {
     return (
         <div className='projectsContainer'>
             <ProjectsToDo user={user} />
-            <ProjectsInProgress />
-            <ProjectsCompleted />
+            {/*<ProjectsInProgress user={user} />
+            <ProjectsCompleted user={user} />*/}
         </div>
     )
 }

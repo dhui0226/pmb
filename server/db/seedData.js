@@ -27,6 +27,7 @@ async function buildTables() {
             CREATE TABLE "projectsTodo" (
                 id SERIAL PRIMARY KEY,
                 "userId" INTEGER REFERENCES users(id),
+                type VARCHAR(255) UNIQUE NOT NULL,
                 title VARCHAR(255) NOT NULL,
                 description VARCHAR(255)
             );
@@ -47,7 +48,11 @@ async function createInitialUsers() {
 
 async function createInititalProject() {
     console.log('creating init projects')
-    const projectsToCreate = [{userId: 1, title: 'Leetcode', description: 'practice data structures'}]
+    const projectsToCreate = [
+        {userId: 1, type: 'todo', title: 'Leetcode', description: 'practice data structures'},
+        {userId: 1, type: 'in progress', title: 'Project', description: 'code and deploy'},
+        {userId: 1, type: 'completed', title: 'Eat Food', description: 'gotta eat'},
+    ]
 
     const projects = await Promise.all(projectsToCreate.map(createProject))
 }
