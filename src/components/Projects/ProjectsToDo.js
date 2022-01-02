@@ -8,11 +8,19 @@ import { getProjectToDos } from '../../utils'
 const ProjectsToDo = ({user}) => {
     const [todos, setTodos] = useState([])
     const [show, setShow] = useState(false);
-    const [newTodo, setNewTodo] = useState(false);
+    const [newTodoClicked, setNewTodoClicked] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleNewTodo = () => setNewTodo(true);
+
+    const handleTodoClicked = () => {
+      setNewTodoClicked(true)
+      console.log('state', newTodoClicked)
+    }
+    const handleCloseTodo = () => {
+      setNewTodoClicked(false)
+      console.log('state 2', newTodoClicked)
+    }
 
     useEffect(async () => {
         const projects = await getProjectToDos(user.id)
@@ -24,7 +32,7 @@ const ProjectsToDo = ({user}) => {
             <h1>To Do</h1>
             <Button 
                 variant="primary" 
-                onClick={handleNewTodo}
+                onClick={handleTodoClicked}
             >Sign Up</Button>
             {todos.map((todo, idx) => (
                 <div key={idx}>
@@ -45,22 +53,25 @@ const ProjectsToDo = ({user}) => {
                     </Offcanvas>
                 </div>
             ))}
-            <Modal  onHide={handleClose} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title>add new todo</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>task 1</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-            </Modal>
 
-            
+            {newTodoClicked ? 
+                <Modal show={true} onHide={handleCloseTodo} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>add new todo</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>task 1</Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleCloseTodo}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                      </Button>
+                    </Modal.Footer>
+                </Modal> : <div>
+                  <h1>Lol</h1>
+                </div>
+            } 
         </div>
     )
 }
