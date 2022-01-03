@@ -20,12 +20,21 @@ export async function register(username, password) {
     }
 }
 
-export async function getProjectToDos(userId) {
+export async function getProjectsByUserId(userId) {
     try {
-        const { data } = await axios.get(`api/projects/${userId}`)
+        const { data } = await axios.get(`api/users/${userId}/projects`)
         return data
     } catch (error) {
         console.error('could not get projects')
+        throw error
+    }
+}
+
+export async function getProjectById(projectId) {
+    try {
+        const { data } = await axios.get(`/api/projects/${projectId}`)
+        return data
+    } catch (error) {
         throw error
     }
 }

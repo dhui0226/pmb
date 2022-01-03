@@ -20,7 +20,18 @@ async function getProjects({userId}) {
     return rows
 }
 
+async function getProject({projectId}) {
+    const { rows } = await client.query(`
+        SELECT *
+        FROM "projectsTodo"
+        WHERE id = ($1)
+    `, [projectId])
+
+    return rows
+}
+
 module.exports = {
     createProject,
-    getProjects
+    getProjects,
+    getProject
 }

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createUser, getUser } = require('../db')
+const { createUser, getUser, getProjects } = require('../db')
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
@@ -21,6 +21,17 @@ router.post('/register', async (req, res) => {
         const user = await createUser({username, password})
 
         res.send(user)
+    } catch (error) {
+        throw error
+    }
+})
+
+router.get('/:userId/projects', async (req, res) => {
+    const { userId } = req.params
+
+    try {
+        const projects = await getProjects({userId})
+        res.send(projects)
     } catch (error) {
         throw error
     }
