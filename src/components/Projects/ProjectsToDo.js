@@ -3,7 +3,8 @@ import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import { getProjectsByUserId, getProjectById } from '../../utils'
+import Form from 'react-bootstrap/Form'
+import { getProjectsByUserId, getProjectById, addProject } from '../../utils'
 
 const projectType = props => <h1>{props.title}</h1>
 
@@ -12,6 +13,10 @@ const ProjectsToDo = ({user}) => {
     const [show, setShow] = useState(false);
     const [newTodoClicked, setNewTodoClicked] = useState(false);
     const [projectCard, setProjectCard] = useState({})
+
+    const [projectTitle, setProjectTitle] = useState('')
+    const [projectDesc, setProjectDesc] = useState('')
+    const [type, setType] = useState('bloop')
 
     const handleClose = () => setShow(false);
     const handleShow = async (id) => {
@@ -27,6 +32,10 @@ const ProjectsToDo = ({user}) => {
     }
     const handleCloseTodo = () => {
       setNewTodoClicked(false)
+    }
+    const handleAddProject = async (userId) => {
+      console.log(userId, type, projectTitle, projectDesc)
+      const newProject = await addProject({userId, type, projectTitle, projectDesc})
     }
 
     useEffect(async () => {
@@ -69,9 +78,21 @@ const ProjectsToDo = ({user}) => {
               <Modal.Header closeButton>
                 <Modal.Title>add new todo</Modal.Title>
               </Modal.Header>
-              <Modal.Body>task 1</Modal.Body>
+              <Modal.Body>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formProjectTitle">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control type="text" placeholder="Enter title" onChange={(event) => setProjectTitle(event.target.value)} />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formProjectDesc">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control type="text" placeholder="Description" onChange={(event) => setProjectDesc(event.target.value)} />
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
               <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={() => {handleAddProject(user.id)}}>
                   Add
                 </Button>
                 <Button variant="secondary" onClick={handleCloseTodo}>
