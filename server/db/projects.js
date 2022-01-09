@@ -1,11 +1,11 @@
 const client = require('./client')
 
-async function createProject({userId, type, title, desc}) {
+async function createProject({userId, projectColumnId, title, desc}) {
     const { rows } = await client.query(`
-        INSERT INTO "projectsTodo"("userId", type, title, description)
+        INSERT INTO "projects"("userId", "projectColumnId", title, description)
         VALUES ($1, $2, $3, $4)
         RETURNING *
-    `, [userId, type, title, desc])
+    `, [userId, projectColumnId, title, desc])
 
     return rows
 }
@@ -13,7 +13,7 @@ async function createProject({userId, type, title, desc}) {
 async function getProjects({userId}) {
     const { rows } = await client.query(`
         SELECT *
-        FROM "projectsTodo"
+        FROM "projects"
         WHERE "userId" = ($1)
     `, [userId])
 
@@ -23,9 +23,19 @@ async function getProjects({userId}) {
 async function getProject({projectId}) {
     const { rows } = await client.query(`
         SELECT *
-        FROM "projectsTodo"
+        FROM "projects"
         WHERE id = ($1)
     `, [projectId])
+
+    return rows
+}
+
+async function createColumn({userId, type}) {
+    const { rows } = await client.query(`
+        INSERT INTO "projectColumns" ("userId", type)
+        VALUES ($1, $2)
+        RETURNING *
+    `, [userId, type])
 
     return rows
 }
@@ -33,5 +43,6 @@ async function getProject({projectId}) {
 module.exports = {
     createProject,
     getProjects,
-    getProject
+    getProject,
+    createColumn
 }

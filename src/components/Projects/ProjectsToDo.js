@@ -16,7 +16,7 @@ const ProjectsToDo = ({user}) => {
 
     const [projectTitle, setProjectTitle] = useState('')
     const [projectDesc, setProjectDesc] = useState('')
-    const [type, setType] = useState('task')
+    const [type, setType] = useState('')
 
     const [newP, setNewP] = useState(false)
 
@@ -29,16 +29,18 @@ const ProjectsToDo = ({user}) => {
       setShow(true);
     }
 
-    const handleShowTodoClicked = () => {
+    const handleShowTodoClicked = (columnId) => {
+      setType(columnId)
       setNewTodoClicked(true)
     }
     const handleCloseTodo = () => {
       setNewTodoClicked(false)
     }
     const handleAddProject = async (userId, type, title, desc) => {
+      let projectColumnId = type
       console.log(userId, type, projectTitle, projectDesc)
-      const newProject = await addProject({userId, type, title, desc})
-      
+      const newProject = await addProject({userId, projectColumnId, title, desc})
+      console.log('neeeewwww', newProject)
       if (newProject) setNewP(true)
     }
 
@@ -52,13 +54,13 @@ const ProjectsToDo = ({user}) => {
 
     return (
       <div>
-        <Button 
-            variant="primary" 
-            onClick={handleShowTodoClicked}
-        >Add Todo</Button>
         {todos.map((todo) => (
             <div key={todo.id}>
-                {projectType({title: todo.type})}
+                {projectType({title: todo.projectColumnId})} {/*make function for getting type by projectColumnId*/}
+                <Button 
+                  variant="primary" 
+                  onClick={() => {handleShowTodoClicked(todo.projectColumnId)}}
+                >Add Todo</Button>
                 <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(todo.id)}}>
                     <Card.Body>
                       <Card.Title>{todo.title}</Card.Title>

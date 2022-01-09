@@ -1,12 +1,13 @@
 const client = require('./client')
 const { createUser } = require('./users')
-const { createProject } = require('./projects')
+const { createProject, createColumn } = require('./projects')
 
 async function dropTables() {
     try {
         console.log('dropping tables')
         await client.query(`
-            DROP TABLE IF EXISTS "projectsTodo";
+            DROP TABLE IF EXISTS "projects";
+            DROP TABLE IF EXISTS "projectColumns";
             DROP TABLE IF EXISTS users;
         `)
     } catch (error) {
@@ -24,10 +25,16 @@ async function buildTables() {
                 username VARCHAR(255) UNIQUE NOT NULL,
                 password VARCHAR(255) NOT NULL
             );
-            CREATE TABLE "projectsTodo" (
+            CREATE TABLE "projectColumns" (
                 id SERIAL PRIMARY KEY,
                 "userId" INTEGER REFERENCES users(id),
-                type VARCHAR(255) UNIQUE NOT NULL,
+                type VARCHAR(255) NOT NULL,
+                UNIQUE ("userId", type)
+            );
+            CREATE TABLE "projects" (
+                id SERIAL PRIMARY KEY,
+                "userId" INTEGER REFERENCES users(id),
+                "projectColumnId" INTEGER REFERENCES "projectColumns"(id),
                 title VARCHAR(255) NOT NULL,
                 description VARCHAR(255)
             );
@@ -46,12 +53,23 @@ async function createInitialUsers() {
     const users = await Promise.all(usersToCreate.map(createUser))
 }
 
+async function createInitialProjectColumns() {
+    console.log('creating init project columns')
+    const columnsToCreate = [
+        {id: 1, userId: 1, type: 'todo'},
+        {id: 2, userId: 1, type: 'in progress'},
+        {id: 3, userId: 1, type: 'completed'}
+    ]
+
+    const columns = await Promise.all(columnsToCreate.map(createColumn))
+}
+
 async function createInititalProject() {
     console.log('creating init projects')
     const projectsToCreate = [
-        {userId: 1, type: 'todo', title: 'Leetcode', description: 'practice data structures'},
-        {userId: 1, type: 'in progress', title: 'Project', description: 'code and deploy'},
-        {userId: 1, type: 'completed', title: 'Eat Food', description: 'gotta eat'},
+        {userId: 1, projectColumnId: 1, title: 'Leetcode', desc: 'practice data structures'},
+        {userId: 1, projectColumnId: 2, title: 'Project', desc: 'code and deploy'},
+        {userId: 1, projectColumnId: 3, title: 'Eat Food', desc: 'gotta eat'}
     ]
 
     const projects = await Promise.all(projectsToCreate.map(createProject))
@@ -63,6 +81,7 @@ async function rebuildDB() {
         await dropTables()
         await buildTables()
         await createInitialUsers()
+        await createInitialProjectColumns()
         await createInititalProject()
     } catch (error) {
         console.log('There was an error during rebuildDB')

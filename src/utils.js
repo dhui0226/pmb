@@ -39,9 +39,9 @@ export async function getProjectById(projectId) {
     }
 }
 
-export async function addProject({userId, type, title, desc}) {
+export async function addProject({userId, projectColumnId, title, desc}) {
     try {
-        const { data } = await axios.post(`api/projects`, {userId, type, title, desc})
+        const { data } = await axios.post(`api/projects`, {userId, projectColumnId, title, desc})
         return data
     } catch (error) {
         throw error
