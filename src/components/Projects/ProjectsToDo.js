@@ -16,7 +16,9 @@ const ProjectsToDo = ({user}) => {
 
     const [projectTitle, setProjectTitle] = useState('')
     const [projectDesc, setProjectDesc] = useState('')
-    const [type, setType] = useState('squid')
+    const [type, setType] = useState('task')
+
+    const [newP, setNewP] = useState(false)
 
     const handleClose = () => setShow(false);
     const handleShow = async (id) => {
@@ -36,6 +38,8 @@ const ProjectsToDo = ({user}) => {
     const handleAddProject = async (userId, type, title, desc) => {
       console.log(userId, type, projectTitle, projectDesc)
       const newProject = await addProject({userId, type, title, desc})
+      
+      if (newProject) setNewP(true)
     }
 
     useEffect(async () => {
@@ -44,7 +48,7 @@ const ProjectsToDo = ({user}) => {
         //set this so app doesnt crash when it doesnt have initial data
         await setProjectCard(projects[0])
         console.log('testtest', todos)
-    }, [])
+    }, [newP])
 
     return (
       <div>
