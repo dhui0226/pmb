@@ -16,7 +16,7 @@ const ProjectsToDo = ({user}) => {
 
     const [projectTitle, setProjectTitle] = useState('')
     const [projectDesc, setProjectDesc] = useState('')
-    const [type, setType] = useState('bloop')
+    const [type, setType] = useState('squid')
 
     const handleClose = () => setShow(false);
     const handleShow = async (id) => {
@@ -33,9 +33,9 @@ const ProjectsToDo = ({user}) => {
     const handleCloseTodo = () => {
       setNewTodoClicked(false)
     }
-    const handleAddProject = async (userId) => {
+    const handleAddProject = async (userId, type, title, desc) => {
       console.log(userId, type, projectTitle, projectDesc)
-      const newProject = await addProject({userId, type, projectTitle, projectDesc})
+      const newProject = await addProject({userId, type, title, desc})
     }
 
     useEffect(async () => {
@@ -92,7 +92,7 @@ const ProjectsToDo = ({user}) => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="primary" onClick={() => {handleAddProject(user.id)}}>
+                <Button variant="primary" onClick={() => {handleAddProject(user.id, type, projectTitle, projectDesc)}}>
                   Add
                 </Button>
                 <Button variant="secondary" onClick={handleCloseTodo}>
