@@ -45,20 +45,24 @@ const ProjectColumns = ({user}) => {
       const newProject = await addProject({userId, columnId, title, desc})
       console.log('neeeewwww', newProject)
 
-      if (newProject) await setNewP(true)
+      if (newProject) {
+        await setNewP(true)
+        setNewProjectClicked(false)
+        setNewP(false)
+      }
     }
 
     useEffect(async () => {
         const projects = await getProjectsByUserId(user.id)
         console.log('inner join', projects)
-        await setProjects(projects)
+        await setProjects(projects.reverse())
         //set this so app doesnt crash when it doesnt have initial data
         await setProjectCard(projects[0])
     }, [newP])
 
     useEffect(async () => {
       const columns = await getColumnsByUserId(user.id)
-      await setColumns(columns)
+      await setColumns(columns.reverse())
       console.log('columns', columns)
     }, [])
 
