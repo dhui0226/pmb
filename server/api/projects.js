@@ -15,10 +15,10 @@ router.get('/:projectId', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { userId, projectColumnId, title, desc } = req.body
+    const { userId, columnId, title, desc } = req.body
 
     try {
-        const newProject = await createProject({userId, projectColumnId, title, desc})
+        const newProject = await createProject({userId, columnId, title, desc})
         res.send(newProject)
     } catch (error) {
         throw error

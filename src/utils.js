@@ -20,6 +20,15 @@ export async function register(username, password) {
     }
 }
 
+export async function getColumnsByUserId(userId) {
+    try {
+        const { data } = await axios.get(`/api/users/${userId}/projectColumns`)
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export async function getProjectsByUserId(userId) {
     try {
         const { data } = await axios.get(`api/users/${userId}/projects`)
@@ -39,9 +48,9 @@ export async function getProjectById(projectId) {
     }
 }
 
-export async function addProject({userId, projectColumnId, title, desc}) {
+export async function addProject({userId, columnId, title, desc}) {
     try {
-        const { data } = await axios.post(`api/projects`, {userId, projectColumnId, title, desc})
+        const { data } = await axios.post(`api/projects`, {userId, columnId, title, desc})
         return data
     } catch (error) {
         throw error

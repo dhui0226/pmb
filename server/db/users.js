@@ -28,7 +28,18 @@ async function getUserByUsername(username) {
     return user
 }
 
+async function getColumns({userId}) {
+    const { rows } = await client.query(`
+        SELECT *
+        FROM "projectColumns"
+        WHERE "userId" = ($1)
+    `, [userId])
+
+    return rows
+}
+
 module.exports = {
     createUser,
-    getUser
+    getUser,
+    getColumns
 }

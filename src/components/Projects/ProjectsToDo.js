@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
-import { getProjectsByUserId, getProjectById, addProject } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId } from '../../utils'
 
 const projectType = props => <h1>{props.title}</h1>
 
@@ -16,7 +16,8 @@ const ProjectsToDo = ({user}) => {
 
     const [projectTitle, setProjectTitle] = useState('')
     const [projectDesc, setProjectDesc] = useState('')
-    const [type, setType] = useState('')
+    const [columnId, setColumnId] = useState('')
+    const [columns, setColumns] = useState([])
 
     const [newP, setNewP] = useState(false)
 
@@ -30,37 +31,44 @@ const ProjectsToDo = ({user}) => {
     }
 
     const handleShowTodoClicked = (columnId) => {
-      setType(columnId)
+      setColumnId(columnId)
       setNewTodoClicked(true)
     }
     const handleCloseTodo = () => {
       setNewTodoClicked(false)
     }
-    const handleAddProject = async (userId, type, title, desc) => {
-      let projectColumnId = type
-      console.log(userId, type, projectTitle, projectDesc)
-      const newProject = await addProject({userId, projectColumnId, title, desc})
+    const handleAddProject = async (userId, columnId, title, desc) => {
+      console.log(userId, columnId, projectTitle, projectDesc)
+      const newProject = await addProject({userId, columnId, title, desc})
       console.log('neeeewwww', newProject)
       if (newProject) setNewP(true)
     }
 
     useEffect(async () => {
         const projects = await getProjectsByUserId(user.id)
+        console.log('inner join', projects)
         await setTodos(projects)
         //set this so app doesnt crash when it doesnt have initial data
         await setProjectCard(projects[0])
-        console.log('testtest', todos)
     }, [newP])
+
+    useEffect(async () => {
+      const columns = await getColumnsByUserId(user.id)
+      await setColumns(columns)
+      console.log('columns', columns)
+    }, [])
 
     return (
       <div>
-        {todos.map((todo) => (
-            <div key={todo.id}>
-                {projectType({title: todo.projectColumnId})} {/*make function for getting type by projectColumnId*/}
-                <Button 
-                  variant="primary" 
-                  onClick={() => {handleShowTodoClicked(todo.projectColumnId)}}
-                >Add Todo</Button>
+        {columns.map((column) => (
+          <div key={column.id}>
+            {projectType({title: column.type})}
+            <Button 
+              variant="primary" 
+              onClick={() => {handleShowTodoClicked(column.id)}} ///////
+            >Add Todo</Button>
+            {todos.map((todo) => (
+              (todo.projectColumnId === column.id) ? <div key={todo.id}>
                 <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(todo.id)}}>
                     <Card.Body>
                       <Card.Title>{todo.title}</Card.Title>
@@ -76,7 +84,9 @@ const ProjectsToDo = ({user}) => {
                   </Offcanvas.Header>
                   <Offcanvas.Body>{projectCard.description}</Offcanvas.Body>
                 </Offcanvas>
-            </div>
+              </div> : null
+            ))}
+          </div>
         ))}
 
         {newTodoClicked ? 
@@ -98,7 +108,7 @@ const ProjectsToDo = ({user}) => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="primary" onClick={() => {handleAddProject(user.id, type, projectTitle, projectDesc)}}>
+                <Button variant="primary" onClick={() => {handleAddProject(user.id, columnId, projectTitle, projectDesc)}}>
                   Add
                 </Button>
                 <Button variant="secondary" onClick={handleCloseTodo}>

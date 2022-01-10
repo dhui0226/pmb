@@ -6,7 +6,7 @@ async function dropTables() {
     try {
         console.log('dropping tables')
         await client.query(`
-            DROP TABLE IF EXISTS "projects";
+            DROP TABLE IF EXISTS projects;
             DROP TABLE IF EXISTS "projectColumns";
             DROP TABLE IF EXISTS users;
         `)
@@ -31,7 +31,7 @@ async function buildTables() {
                 type VARCHAR(255) NOT NULL,
                 UNIQUE ("userId", type)
             );
-            CREATE TABLE "projects" (
+            CREATE TABLE projects (
                 id SERIAL PRIMARY KEY,
                 "userId" INTEGER REFERENCES users(id),
                 "projectColumnId" INTEGER REFERENCES "projectColumns"(id),

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createUser, getUser, getProjects } = require('../db')
+const { createUser, getUser, getColumns, getProjects } = require('../db')
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
@@ -22,6 +22,18 @@ router.post('/register', async (req, res) => {
 
         res.send(user)
     } catch (error) {
+        throw error
+    }
+})
+
+router.get('/:userId/projectColumns', async (req, res) => {
+    const { userId } = req.params
+
+    try {
+        const projectColumns = await getColumns({userId})
+        res.send(projectColumns)
+    } catch (error) {
+        console.error('could not get columns')
         throw error
     }
 })
