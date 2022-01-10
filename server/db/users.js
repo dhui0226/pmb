@@ -28,6 +28,16 @@ async function getUserByUsername(username) {
     return user
 }
 
+async function createColumn({userId, type}) {
+    const { rows } = await client.query(`
+        INSERT INTO "projectColumns" ("userId", type)
+        VALUES ($1, $2)
+        RETURNING *
+    `, [userId, type])
+
+    return rows
+}
+
 async function getColumns({userId}) {
     const { rows } = await client.query(`
         SELECT *
@@ -41,5 +51,6 @@ async function getColumns({userId}) {
 module.exports = {
     createUser,
     getUser,
+    createColumn,
     getColumns
 }

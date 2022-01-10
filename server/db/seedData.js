@@ -1,6 +1,6 @@
 const client = require('./client')
-const { createUser } = require('./users')
-const { createProject, createColumn } = require('./projects')
+const { createUser, createColumn } = require('./users')
+const { createProject } = require('./projects')
 
 async function dropTables() {
     try {
@@ -56,9 +56,9 @@ async function createInitialUsers() {
 async function createInitialProjectColumns() {
     console.log('creating init project columns')
     const columnsToCreate = [
-        {id: 1, userId: 1, type: 'todo'},
-        {id: 2, userId: 1, type: 'in progress'},
-        {id: 3, userId: 1, type: 'completed'}
+        {id: 1, userId: 1, type: 'To Do'},
+        {id: 2, userId: 1, type: 'In Progress'},
+        {id: 3, userId: 1, type: 'Completed'}
     ]
 
     const columns = await Promise.all(columnsToCreate.map(createColumn))

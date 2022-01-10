@@ -32,19 +32,8 @@ async function getProject({projectId}) {
     return rows
 }
 
-async function createColumn({userId, type}) {
-    const { rows } = await client.query(`
-        INSERT INTO "projectColumns" ("userId", type)
-        VALUES ($1, $2)
-        RETURNING *
-    `, [userId, type])
-
-    return rows
-}
-
 module.exports = {
     createProject,
     getProjects,
-    getProject,
-    createColumn
+    getProject
 }

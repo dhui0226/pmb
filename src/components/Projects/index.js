@@ -44,7 +44,8 @@ const ProjectColumns = ({user}) => {
       console.log(userId, columnId, projectTitle, projectDesc)
       const newProject = await addProject({userId, columnId, title, desc})
       console.log('neeeewwww', newProject)
-      if (newProject) setNewP(true)
+
+      if (newProject) await setNewP(true)
     }
 
     useEffect(async () => {
@@ -68,7 +69,7 @@ const ProjectColumns = ({user}) => {
             {projectType({title: column.type})}
             <Button 
               variant="primary" 
-              onClick={() => {handleShowNewProject(column.id)}} ///////
+              onClick={() => {handleShowNewProject(column.id)}}
             >Add Todo</Button>
             {projects.map((project) => (
               (project.projectColumnId === column.id) ? <div key={project.id}>
