@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createProject, getProject } = require('../db')
+const { createProject, getProject, updateColumn} = require('../db')
 
 router.get('/:projectId', async (req, res) => {
     const { projectId } = req.params
@@ -20,6 +20,17 @@ router.post('/', async (req, res) => {
     try {
         const newProject = await createProject({userId, columnId, title, desc})
         res.send(newProject)
+    } catch (error) {
+        throw error
+    }
+})
+
+router.post('/:projectId/projectColumns', async (req, res) => {
+    const {projectId, newColumnId} = req.body
+
+    try {
+        const newColumn = await updateColumn({projectId, newColumnId})
+        res.send(newColumn)
     } catch (error) {
         throw error
     }

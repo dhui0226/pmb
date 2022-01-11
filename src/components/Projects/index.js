@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn } from '../../utils'
 import './index.css'
 
 const projectType = props => <h1>{props.title}</h1>
@@ -14,7 +14,6 @@ const projectType = props => <h1>{props.title}</h1>
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
     const [show, setShow] = useState(false);
-    const [isOpen, setIsOpen] = useState(false)
 
     const [newProjectClicked, setNewProjectClicked] = useState(false);
     const [projectCard, setProjectCard] = useState({})
@@ -35,8 +34,16 @@ const ProjectColumns = ({user}) => {
     }
     const handleClose = () => setShow(false);
 
-    const handleDropdown = (id) => {
-      console.log(`scooby doo ${id}`)
+    const handleDropdown = async (projectId, newColumnId) => {
+      console.log(`scooby doo ${projectId}, ${newColumnId}`)
+      //create route to change project type in db
+      const newColumn = await updateProjectColumn(projectId, newColumnId)
+      console.log('new column', newColumn)
+      if (newColumn) {
+        await setNewP(true)
+        setNewP(false)
+        setShow(false)
+      }
     }
 
     const handleShowNewProject = (columnId) => {
@@ -100,7 +107,7 @@ const ProjectColumns = ({user}) => {
                     <DropdownButton id="dropdown-basic-button" title="Move">
                       {columns.map((column) => (
                         <div key={column.id}>
-                          <Dropdown.Item onClick={() => {handleDropdown(column.id)}}>{column.type}</Dropdown.Item>
+                          <Dropdown.Item onClick={() => {handleDropdown(projectCard.id, column.id)}}>{column.type}</Dropdown.Item>
                         </div>
                       ))}
                     </DropdownButton>

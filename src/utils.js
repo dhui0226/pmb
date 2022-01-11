@@ -29,6 +29,15 @@ export async function getColumnsByUserId(userId) {
     }
 }
 
+export async function updateProjectColumn(projectId, newColumnId) {
+    try {
+        const { data } = await axios.post(`/api/projects/${projectId}/projectColumns`, {projectId, newColumnId})
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export async function getProjectsByUserId(userId) {
     try {
         const { data } = await axios.get(`api/users/${userId}/projects`)
