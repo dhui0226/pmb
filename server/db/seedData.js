@@ -10,6 +10,7 @@ async function dropTables() {
             DROP TABLE IF EXISTS "projectColumns";
             DROP TABLE IF EXISTS users;
         `)
+        console.log('dropping tables completed')
     } catch (error) {
         console.error('error dropping tables')
         throw error
@@ -39,7 +40,7 @@ async function buildTables() {
                 description VARCHAR(255)
             );
         `)
-        console.log('done building tables')
+        console.log('building tables completed')
     } catch (error) {
         console.error('error building tables')
         throw error
@@ -48,9 +49,10 @@ async function buildTables() {
 
 async function createInitialUsers() {
     console.log('creating init users')
-    const usersToCreate = [{username: 'user', password: 'pass'}]
+    const usersToCreate = [{username: 'Toki', password: '1234'}]
 
     const users = await Promise.all(usersToCreate.map(createUser))
+    console.log('creating users completed')
 }
 
 async function createInitialProjectColumns() {
@@ -62,17 +64,19 @@ async function createInitialProjectColumns() {
     ]
 
     const columns = await Promise.all(columnsToCreate.map(createColumn))
+    console.log('creating project columns completed')
 }
 
 async function createInititalProject() {
     console.log('creating init projects')
     const projectsToCreate = [
-        {userId: 1, projectColumnId: 1, title: 'Leetcode', desc: 'practice data structures'},
-        {userId: 1, projectColumnId: 2, title: 'Project', desc: 'code and deploy'},
-        {userId: 1, projectColumnId: 3, title: 'Eat Food', desc: 'gotta eat'}
+        {userId: 1, columnId: 1, title: 'Leetcode', desc: 'practice data structures'},
+        {userId: 1, columnId: 2, title: 'Project', desc: 'code and deploy'},
+        {userId: 1, columnId: 3, title: 'Eat Food', desc: 'gotta eat'}
     ]
 
     const projects = await Promise.all(projectsToCreate.map(createProject))
+    console.log('creating projects completed')
 }
 
 async function rebuildDB() {

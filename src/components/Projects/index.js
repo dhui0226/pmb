@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId } from '../../utils'
 import './index.css'
 
@@ -12,6 +14,8 @@ const projectType = props => <h1>{props.title}</h1>
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
     const [show, setShow] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
+
     const [newProjectClicked, setNewProjectClicked] = useState(false);
     const [projectCard, setProjectCard] = useState({})
 
@@ -30,6 +34,10 @@ const ProjectColumns = ({user}) => {
       setShow(true);
     }
     const handleClose = () => setShow(false);
+
+    const handleDropdown = (id) => {
+      console.log(`scooby doo ${id}`)
+    }
 
     const handleShowNewProject = (columnId) => {
       //modal for creating a new project card
@@ -74,7 +82,7 @@ const ProjectColumns = ({user}) => {
             <Button 
               variant="primary" 
               onClick={() => {handleShowNewProject(column.id)}}
-            >Add Todo</Button>
+            >+</Button>
             {projects.map((project) => (
               (project.projectColumnId === column.id) ? <div key={project.id}>
                 <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(project.id)}}>
@@ -89,6 +97,13 @@ const ProjectColumns = ({user}) => {
                 <Offcanvas show={show} onHide={handleClose}>
                   <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{projectCard.title}</Offcanvas.Title>
+                    <DropdownButton id="dropdown-basic-button" title="Move">
+                      {columns.map((column) => (
+                        <div key={column.id}>
+                          <Dropdown.Item onClick={() => {handleDropdown(column.id)}}>{column.type}</Dropdown.Item>
+                        </div>
+                      ))}
+                    </DropdownButton>
                   </Offcanvas.Header>
                   <Offcanvas.Body>{projectCard.description}</Offcanvas.Body>
                 </Offcanvas>

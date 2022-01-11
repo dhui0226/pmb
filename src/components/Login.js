@@ -44,12 +44,12 @@ const Login = ({setUser}) => {
     return (
       <div className="login d-flex justify-content-center align-items-center">
               <Form className="text-center">
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicUsername">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Email address"
+                    label="Username"
                     className="mb-3">
-                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => setUsername(event.target.value)} />
+                    <Form.Control type="text" placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
                   </FloatingLabel>
                 </Form.Group>
 
@@ -82,12 +82,12 @@ const Login = ({setUser}) => {
           </Modal.Header>
           <Modal.Body>
             <Form>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Email address"
+                      label="Username"
                       className="mb-3">
-                      <Form.Control type="email" placeholder="Enter email" onChange={(event) => {setUsername(event.target.value)}} />
+                      <Form.Control type="text" placeholder="Username" onChange={(event) => {setUsername(event.target.value)}} />
                     </FloatingLabel>
                   </Form.Group>
 
