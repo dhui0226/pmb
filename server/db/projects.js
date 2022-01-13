@@ -32,6 +32,18 @@ async function getProject({projectId}) {
     return rows
 }
 
+async function editProject({projectId, newTitle, newDesc}) {
+    const { rows } = await client.query(`
+        UPDATE projects
+        SET title = ($2), 
+            description = ($3)
+        WHERE id = ($1)
+        RETURNING *
+    `, [projectId, newTitle, newDesc])
+
+    return rows
+}
+
 async function updateColumn({projectId, newColumnId}) {
     const { rows } = await client.query(`
         UPDATE projects
@@ -47,5 +59,6 @@ module.exports = {
     createProject,
     getProjects,
     getProject,
+    editProject,
     updateColumn
 }

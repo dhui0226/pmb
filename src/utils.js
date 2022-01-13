@@ -66,6 +66,15 @@ export async function addProject({userId, columnId, title, desc}) {
     }
 }
 
+export async function editProjectCard({projectId, newTitle, newDesc}) {
+    try {
+        const { data } = await axios.post(`/api/projects/${projectId}`, {projectId, newTitle, newDesc})
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export async function test() {
     try {
         const data = await axios.get('/')

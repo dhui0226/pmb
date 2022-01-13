@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard } from '../../utils'
 import './index.css'
 
 const projectType = props => <h1>{props.title}</h1>
@@ -14,12 +14,16 @@ const projectType = props => <h1>{props.title}</h1>
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
     const [show, setShow] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
 
     const [newProjectClicked, setNewProjectClicked] = useState(false);
     const [projectCard, setProjectCard] = useState({})
 
     const [projectTitle, setProjectTitle] = useState('')
     const [projectDesc, setProjectDesc] = useState('')
+    const [editTitle, setEditTitle] = useState('')
+    const [editDesc, setEditDesc] = useState('')
+
     const [columnId, setColumnId] = useState('')
     const [columns, setColumns] = useState([])
 
@@ -33,6 +37,22 @@ const ProjectColumns = ({user}) => {
       setShow(true);
     }
     const handleClose = () => setShow(false);
+    const handleShowEdit = (title, description) => {
+      setShowEdit(!showEdit)
+      setEditTitle(title)
+      setEditDesc(description)
+    }
+
+    const handleEditProject = async (projectId, newTitle, newDesc) => {
+      const project = await editProjectCard({projectId, newTitle, newDesc})
+      console.log('edited', project)
+      if (project) {
+        await setNewP(true)
+        setNewP(false)
+        setShow(false)
+        setShowEdit(!showEdit)
+      }
+    }
 
     const handleDropdown = async (projectId, newColumnId) => {
       console.log(`scooby doo ${projectId}, ${newColumnId}`)
@@ -103,8 +123,22 @@ const ProjectColumns = ({user}) => {
 
                 <Offcanvas show={show} onHide={handleClose}>
                   <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{projectCard.title}</Offcanvas.Title>
-                    <DropdownButton id="dropdown-basic-button" title="Move">
+                    <Offcanvas.Title>
+                      {showEdit ?
+                        <Form.Control 
+                          type="text" 
+                          defaultValue={projectCard.title}
+                          onChange={(event) => setEditTitle(event.target.value)} /> 
+                        : projectCard.title
+                      }
+                    </Offcanvas.Title>
+                    {/*Edit button*/}
+                    <Button 
+                      variant="primary"
+                      size="sm"
+                      onClick={() => handleShowEdit(projectCard.title, projectCard.description)}
+                    >Edit</Button>{' '}
+                    <DropdownButton id="dropdown-basic-button" size="sm" title="Move">
                       {columns.map((column) => (
                         <div key={column.id}>
                           <Dropdown.Item onClick={() => {handleDropdown(projectCard.id, column.id)}}>{column.type}</Dropdown.Item>
@@ -112,7 +146,29 @@ const ProjectColumns = ({user}) => {
                       ))}
                     </DropdownButton>
                   </Offcanvas.Header>
-                  <Offcanvas.Body>{projectCard.description}</Offcanvas.Body>
+                  <Offcanvas.Body>
+                    {showEdit ?
+                      <Form>
+                        <Form.Control 
+                          type="text" 
+                          defaultValue={projectCard.description}
+                          onChange={(event) => setEditDesc(event.target.value)} />
+                        <div className="editBtn">
+                          <Button 
+                            variant="primary"
+                            size="sm"
+                            onClick={() => {handleEditProject(projectCard.id, editTitle, editDesc)}}
+                          >Save</Button>{' '}
+                          <Button 
+                            variant="primary"
+                            size="sm"
+                            onClick={handleShowEdit}
+                          >Cancel</Button>{' '}
+                        </div>
+                      </Form>
+                      : projectCard.description
+                    }
+                  </Offcanvas.Body>
                 </Offcanvas>
               </div> : null
             ))}
