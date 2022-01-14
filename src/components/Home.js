@@ -8,9 +8,9 @@ const Home = ({user, setUser}) => {
     return (
         <div className="home">
             <Navbar setUser={setUser} />
-            <Dashboard />
+            {/*<Dashboard />*/}
             <Projects user={user} />
-            <MyTasks />
+            {/*<MyTasks />*/}
         </div>
     )
 }

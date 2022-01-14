@@ -2,6 +2,10 @@
     width: 18rem;
 }
 
+.projectThing {
+    display: flex;
+}
+
 .editBtn {
     margin-top: 10px;
 }

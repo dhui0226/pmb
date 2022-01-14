@@ -102,7 +102,7 @@ const ProjectColumns = ({user}) => {
     }, [])
 
     return (
-      <div>
+      <div className='projectThing'>
         {columns.map((column) => (
           <div key={column.id}>
             {projectType({title: column.type})}
