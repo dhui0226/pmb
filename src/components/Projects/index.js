@@ -36,9 +36,17 @@ const ProjectColumns = ({user}) => {
       setProjectCard(project[0])
       setShow(true);
     }
-    const handleClose = () => setShow(false);
-    const handleShowEdit = (title, description) => {
-      setShowEdit(!showEdit)
+    const handleClose = () => {
+      setShow(false)
+      setShowEdit(false)
+    }
+    const handleShowEdit = (title, description, btn) => {
+      if (btn === 'edit') {
+        setShowEdit(true)
+
+      } else if (btn === 'cancel') {
+        setShowEdit(false)
+      }
       setEditTitle(title)
       setEditDesc(description)
     }
@@ -50,7 +58,7 @@ const ProjectColumns = ({user}) => {
         await setNewP(true)
         setNewP(false)
         setShow(false)
-        setShowEdit(!showEdit)
+        setShowEdit(true)
       }
     }
 
@@ -136,7 +144,7 @@ const ProjectColumns = ({user}) => {
                     <Button 
                       variant="primary"
                       size="sm"
-                      onClick={() => handleShowEdit(projectCard.title, projectCard.description)}
+                      onClick={() => handleShowEdit(projectCard.title, projectCard.description, 'edit')}
                     >Edit</Button>{' '}
                     <DropdownButton id="dropdown-basic-button" size="sm" title="Move">
                       {columns.map((column) => (
@@ -162,7 +170,7 @@ const ProjectColumns = ({user}) => {
                           <Button 
                             variant="primary"
                             size="sm"
-                            onClick={handleShowEdit}
+                            onClick={() => handleShowEdit(null, null, 'cancel')}
                           >Cancel</Button>{' '}
                         </div>
                       </Form>
