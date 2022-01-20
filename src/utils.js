@@ -75,6 +75,15 @@ export async function editProjectCard({projectId, newTitle, newDesc}) {
     }
 }
 
+export async function deleteProjectCard(projectId) {
+    try {
+        const { data } = await axios.delete(`/api/projects/${projectId}`)
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export async function test() {
     try {
         const data = await axios.get('/')

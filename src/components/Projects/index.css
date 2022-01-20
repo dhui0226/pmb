@@ -9,3 +9,9 @@
 .editBtn {
     margin-top: 10px;
 }
+
+.deleteBtn {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}

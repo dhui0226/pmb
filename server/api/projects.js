@@ -1,7 +1,7 @@
 const express = require('express')
 //const { editProjectCard } = require('../../src/utils')
 const router = express.Router()
-const { createProject, getProject, updateColumn, editProject } = require('../db')
+const { createProject, getProject, updateColumn, editProject, deleteProject } = require('../db')
 
 router.get('/:projectId', async (req, res) => {
     const { projectId } = req.params
@@ -38,12 +38,24 @@ router.post('/:projectId/projectColumns', async (req, res) => {
 })
 
 router.post('/:projectId', async (req, res) => {
-    const {projectId, newTitle, newDesc} = req.body
+    const { projectId, newTitle, newDesc } = req.body
 
     try {
         const project = await editProject({projectId, newTitle, newDesc})
         res.send(project)
     } catch (error) {
+        throw error
+    }
+})
+
+router.delete('/:projectId', async (req, res) => {
+    const { projectId } = req.params
+
+    try {
+        const project = await deleteProject({projectId})
+        res.send(project)
+    } catch (error) {
+        console.error(`could not delete this project ${projectId}`)
         throw error
     }
 })

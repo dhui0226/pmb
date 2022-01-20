@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard } from '../../utils'
 import './index.css'
 
 const projectType = props => <h1>{props.title}</h1>
@@ -71,6 +71,15 @@ const ProjectColumns = ({user}) => {
         await setNewP(true)
         setNewP(false)
         setShow(false)
+      }
+    }
+
+    const handleDelete = async (projectId) => {
+      const project = await deleteProjectCard(projectId)
+      if (project) {
+        await setNewP(true)
+        setNewP(false)
+        handleClose()
       }
     }
 
@@ -174,7 +183,15 @@ const ProjectColumns = ({user}) => {
                           >Cancel</Button>{' '}
                         </div>
                       </Form>
-                      : projectCard.description
+                      : 
+                      <div>
+                        {projectCard.description}
+                        <Button 
+                          className='deleteBtn' 
+                          variant="primary"
+                          onClick={() => handleDelete(projectCard.id)}
+                        >Delete</Button>{' '}
+                      </div>
                     }
                   </Offcanvas.Body>
                 </Offcanvas>

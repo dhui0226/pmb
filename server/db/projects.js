@@ -44,6 +44,16 @@ async function editProject({projectId, newTitle, newDesc}) {
     return rows
 }
 
+async function deleteProject({projectId}) {
+    const { rows } = await client.query(`
+        DELETE FROM projects
+        WHERE id = ($1)
+        RETURNING *
+    `, [projectId])
+
+    return rows
+}
+
 async function updateColumn({projectId, newColumnId}) {
     const { rows } = await client.query(`
         UPDATE projects
@@ -60,5 +70,6 @@ module.exports = {
     getProjects,
     getProject,
     editProject,
+    deleteProject,
     updateColumn
 }
