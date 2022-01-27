@@ -7,7 +7,7 @@ import './Home.css'
 const Home = ({user, setUser}) => {
     return (
         <div className="home">
-            <Navbar setUser={setUser} />
+            <Navbar className="boop" setUser={setUser} />
             {/*<Dashboard />*/}
             <Projects user={user} />
             {/*<MyTasks />*/}

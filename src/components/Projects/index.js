@@ -121,7 +121,7 @@ const ProjectColumns = ({user}) => {
     return (
       <div className='projectThing'>
         {columns.map((column) => (
-          <div key={column.id}>
+          <div key={column.id} className='column'>
             {projectType({title: column.type})}
             <Button 
               variant="primary" 

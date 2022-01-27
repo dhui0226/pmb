@@ -4,7 +4,7 @@ import './Navbar.css'
 
 const Navbar = ({setUser}) => {
     return (
-        <div>
+        <div className="navigation">
             <h1>nav bar</h1>
             <Nav variant="pills" defaultActiveKey="/home" className="nav flex-column">
                 <Nav.Item>
