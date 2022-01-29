@@ -9,7 +9,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard } from '../../utils'
 import './index.css'
 
-const projectType = props => <h1>{props.title}</h1>
+const projectType = props => <h1 className="columnName">{props.title}</h1>
 
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
@@ -122,11 +122,16 @@ const ProjectColumns = ({user}) => {
       <div className='projectThing'>
         {columns.map((column) => (
           <div key={column.id} className='column'>
-            {projectType({title: column.type})}
-            <Button 
-              variant="primary" 
-              onClick={() => {handleShowNewProject(column.id)}}
-            >+</Button>
+            <div className="titleArea">
+              {projectType({title: column.type})}
+              <div>
+                <Button
+                  className="newCardBtn" 
+                  variant="primary" 
+                  onClick={() => {handleShowNewProject(column.id)}}
+                >+</Button>
+              </div>
+            </div>
             {projects.map((project) => (
               (project.projectColumnId === column.id) ? <div key={project.id}>
                 <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(project.id)}}>

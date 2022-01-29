@@ -5,7 +5,7 @@ import TasksCompleted from './TasksCompleted'
 
 const MyTasks = () => {
     return (
-        <div>
+        <div className='taskThing'>
             <h1>Tasks</h1>
             <TasksToDo />
             <TasksInProgress />

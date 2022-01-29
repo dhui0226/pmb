@@ -4,6 +4,33 @@
 
 .projectThing {
     display: flex;
+    /*border: solid black 3px;*/
+    height: 100vh;
+    margin: 10px;
+}
+
+/*.column {
+    border: solid black 3px;
+}*/
+
+.titleArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.columnName {
+    margin-left: 10px;
+}
+
+.card {
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.newCardBtn {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .editBtn {

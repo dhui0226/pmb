@@ -1,11 +1,23 @@
+.navigation {
+    background-color: white;
+    border-radius: 15px;
+    margin: 10px 0 10px 10px;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.image {
+    margin: 10px;
+}
+
 .nav {
-    /*position: absolute;*/
-    width: 20%;
-    height: 100%;
+    /*border: solid black 3px;*/
+    height: 100vh;
+    /*margin: 10px;*/
 }
 
 .nav-link {
     color: #834333;
+    margin: 8px;
 }
 
 .nav-link:hover {
@@ -20,6 +32,7 @@
 .btn-outline-primary {
     color: #834333;
     border-color: #834333;
+    margin: 8px;
 }
 
 .btn-outline-primary:hover {

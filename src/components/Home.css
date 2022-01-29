@@ -1,15 +1,5 @@
 .home {
    display: flex;
+   background-color: #F1ECE4;
 }
 
-.navigation {
-   border: solid black 3px;
-}
-
-.projectThing {
-   border: solid black 3px;
-}
-
-.column {
-   border: solid red 3px;
-}
