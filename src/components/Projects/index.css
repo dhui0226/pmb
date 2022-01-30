@@ -17,6 +17,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /*border: solid blue 3px;*/
+}
+
+.scrollDis {
+    overflow-y: auto;
+    height: 100%;
 }
 
 .columnName {

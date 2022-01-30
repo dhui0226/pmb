@@ -132,76 +132,78 @@ const ProjectColumns = ({user}) => {
                 >+</Button>
               </div>
             </div>
-            {projects.map((project) => (
-              (project.projectColumnId === column.id) ? <div key={project.id}>
-                <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(project.id)}}>
-                    <Card.Body>
-                      <Card.Title>{project.title}</Card.Title>
-                      <Card.Text>
-                        {project.description}
-                      </Card.Text>
-                    </Card.Body>
-                </Card>
+            <div className="scrollDis">
+              {projects.map((project) => (
+                (project.projectColumnId === column.id) ? <div key={project.id}>
+                  <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(project.id)}}>
+                      <Card.Body>
+                        <Card.Title>{project.title}</Card.Title>
+                        <Card.Text>
+                          {project.description}
+                        </Card.Text>
+                      </Card.Body>
+                  </Card>
 
-                <Offcanvas show={show} onHide={handleClose}>
-                  <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>
+                  <Offcanvas show={show} onHide={handleClose}>
+                    <Offcanvas.Header closeButton>
+                      <Offcanvas.Title>
+                        {showEdit ?
+                          <Form.Control 
+                            type="text" 
+                            defaultValue={projectCard.title}
+                            onChange={(event) => setEditTitle(event.target.value)} /> 
+                          : projectCard.title
+                        }
+                      </Offcanvas.Title>
+                      {/*Edit button*/}
+                      <Button 
+                        variant="primary"
+                        size="sm"
+                        onClick={() => handleShowEdit(projectCard.title, projectCard.description, 'edit')}
+                      >Edit</Button>{' '}
+                      <DropdownButton id="dropdown-basic-button" size="sm" title="Move">
+                        {columns.map((column) => (
+                          <div key={column.id}>
+                            <Dropdown.Item onClick={() => {handleDropdown(projectCard.id, column.id)}}>{column.type}</Dropdown.Item>
+                          </div>
+                        ))}
+                      </DropdownButton>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
                       {showEdit ?
-                        <Form.Control 
-                          type="text" 
-                          defaultValue={projectCard.title}
-                          onChange={(event) => setEditTitle(event.target.value)} /> 
-                        : projectCard.title
+                        <Form>
+                          <Form.Control 
+                            type="text" 
+                            defaultValue={projectCard.description}
+                            onChange={(event) => setEditDesc(event.target.value)} />
+                          <div className="editBtn">
+                            <Button 
+                              variant="primary"
+                              size="sm"
+                              onClick={() => {handleEditProject(projectCard.id, editTitle, editDesc)}}
+                            >Save</Button>{' '}
+                            <Button 
+                              variant="primary"
+                              size="sm"
+                              onClick={() => handleShowEdit(null, null, 'cancel')}
+                            >Cancel</Button>{' '}
+                          </div>
+                        </Form>
+                        : 
+                        <div>
+                          {projectCard.description}
+                          <Button 
+                            className='deleteBtn' 
+                            variant="primary"
+                            onClick={() => handleDelete(projectCard.id)}
+                          >Delete</Button>{' '}
+                        </div>
                       }
-                    </Offcanvas.Title>
-                    {/*Edit button*/}
-                    <Button 
-                      variant="primary"
-                      size="sm"
-                      onClick={() => handleShowEdit(projectCard.title, projectCard.description, 'edit')}
-                    >Edit</Button>{' '}
-                    <DropdownButton id="dropdown-basic-button" size="sm" title="Move">
-                      {columns.map((column) => (
-                        <div key={column.id}>
-                          <Dropdown.Item onClick={() => {handleDropdown(projectCard.id, column.id)}}>{column.type}</Dropdown.Item>
-                        </div>
-                      ))}
-                    </DropdownButton>
-                  </Offcanvas.Header>
-                  <Offcanvas.Body>
-                    {showEdit ?
-                      <Form>
-                        <Form.Control 
-                          type="text" 
-                          defaultValue={projectCard.description}
-                          onChange={(event) => setEditDesc(event.target.value)} />
-                        <div className="editBtn">
-                          <Button 
-                            variant="primary"
-                            size="sm"
-                            onClick={() => {handleEditProject(projectCard.id, editTitle, editDesc)}}
-                          >Save</Button>{' '}
-                          <Button 
-                            variant="primary"
-                            size="sm"
-                            onClick={() => handleShowEdit(null, null, 'cancel')}
-                          >Cancel</Button>{' '}
-                        </div>
-                      </Form>
-                      : 
-                      <div>
-                        {projectCard.description}
-                        <Button 
-                          className='deleteBtn' 
-                          variant="primary"
-                          onClick={() => handleDelete(projectCard.id)}
-                        >Delete</Button>{' '}
-                      </div>
-                    }
-                  </Offcanvas.Body>
-                </Offcanvas>
-              </div> : null
-            ))}
+                    </Offcanvas.Body>
+                  </Offcanvas>
+                </div> : null
+              ))}
+            </div>
           </div>
         ))}
 
