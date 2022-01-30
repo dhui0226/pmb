@@ -5,13 +5,15 @@
     border: 1px solid rgba(0,0,0,.125);
 }
 
-.image {
-    margin: 10px;
+img {
+    width: 75%;
+    margin-left: 12%;
+    margin-top: 5%;
 }
 
 .nav {
     /*border: solid black 3px;*/
-    height: 100vh;
+    height: 65vh; /*keeps page from getting too long*/
     /*margin: 10px;*/
 }
 
