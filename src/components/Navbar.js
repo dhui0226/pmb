@@ -11,7 +11,7 @@ import './Navbar.css'
 const Navbar = ({user, setUser}) => {
     return (
         <div className="navigation">
-          <Image roundedCircle src={corgi} alt="corgi" responsive />
+          <Image roundedCircle src={corgi} alt="corgi" />
           <Nav variant="pills" defaultActiveKey="/" className="nav flex-column">
               <Nav.Item>
                 <Nav.Link href="/" as={Link} to="/dashboard">Dashboard</Nav.Link>

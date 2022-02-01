@@ -48,6 +48,17 @@ router.get('/:userId/projectColumns', async (req, res) => {
     }
 })
 
+router.post('/:userId/projectColumns', async (req, res) => {
+    const { userId, type } = req.body
+
+    try {
+        const column = await createColumn({userId, type})
+        res.send(column)
+    } catch (error) {
+        throw error
+    }
+})
+
 router.get('/:userId/projects', async (req, res) => {
     const { userId } = req.params
 

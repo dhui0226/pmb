@@ -5,7 +5,8 @@
 .projectThing {
     display: flex;
     /*border: solid yellow 3px;*/
-    margin: 10px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 /*.column {
@@ -16,6 +17,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 19rem;
+    height: 5rem;
     /*border: solid blue 3px;*/
 }
 

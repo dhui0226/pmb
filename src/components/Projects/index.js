@@ -7,9 +7,10 @@ import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard } from '../../utils'
+import NewColumn from './NewColumn'
 import './index.css'
 
-const projectType = props => <h1 className="columnName">{props.title}</h1>
+const projectType = props => <h3 className="columnName">{props.title}</h3>
 
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
@@ -28,6 +29,7 @@ const ProjectColumns = ({user}) => {
     const [columns, setColumns] = useState([])
 
     const [newP, setNewP] = useState(false)
+    const [newC, setNewC] = useState(false)
 
     const handleShow = async (id) => {
       //GET request to grab info for individual card to display on offcanvas
@@ -116,7 +118,7 @@ const ProjectColumns = ({user}) => {
       const columns = await getColumnsByUserId(user.id)
       await setColumns(columns.reverse())
       console.log('columns', columns)
-    }, [])
+    }, [newC])
 
     return (
       <div className='projectThing'>
@@ -124,13 +126,11 @@ const ProjectColumns = ({user}) => {
           <div key={column.id} className='column'>
             <div className="titleArea">
               {projectType({title: column.type})}
-              <div>
                 <Button
                   className="newCardBtn" 
                   variant="primary" 
                   onClick={() => {handleShowNewProject(column.id)}}
                 >+</Button>
-              </div>
             </div>
             <div className="scrollDis">
               {projects.map((project) => (
@@ -206,6 +206,7 @@ const ProjectColumns = ({user}) => {
             </div>
           </div>
         ))}
+        <NewColumn user={user} setNewC={setNewC} />
 
         {newProjectClicked ? 
           <Modal show={true} onHide={handleCloseNewProject} centered>

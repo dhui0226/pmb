@@ -15,8 +15,7 @@ const Home = ({user, setUser}) => {
             <Routes>
               <Route exact path="/projects" element={<Projects user={user} />} />
               <Route path="/tasks" element={<MyTasks />} />
-            </Routes>
-            
+            </Routes> 
         </div>
     )
 }
