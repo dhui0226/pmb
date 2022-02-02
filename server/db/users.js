@@ -43,6 +43,7 @@ async function getColumns({userId}) {
         SELECT *
         FROM "projectColumns"
         WHERE "userId" = ($1)
+        ORDER BY id ASC
     `, [userId])
 
     return rows

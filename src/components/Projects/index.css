@@ -3,6 +3,7 @@
 }
 
 .projectThing {
+    color: #834333;
     display: flex;
     /*border: solid yellow 3px;*/
     width: 100%;

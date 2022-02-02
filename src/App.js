@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Login, Home } from './components'
-import './App.css'
 
 const App = () => {
     const [user, setUser] = useState({})

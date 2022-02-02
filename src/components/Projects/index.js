@@ -116,7 +116,7 @@ const ProjectColumns = ({user}) => {
 
     useEffect(async () => {
       const columns = await getColumnsByUserId(user.id)
-      await setColumns(columns.reverse())
+      await setColumns(columns)
       console.log('columns', columns)
     }, [newC])
 

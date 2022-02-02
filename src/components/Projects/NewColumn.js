@@ -17,6 +17,7 @@ const NewColumn = ({user, setNewC}) => {
         if (column) {
             await setNewC(true)
             setNewC(false)
+            setShow(false)
         }
     }
     

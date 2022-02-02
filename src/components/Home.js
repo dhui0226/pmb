@@ -9,11 +9,8 @@ const Home = ({user, setUser}) => {
     return (
         <div className="home">
             <Navbar user={user} setUser={setUser} />
-            {/*<Dashboard />*/}
-            {/*<Projects user={user} />*/}
-            {/*<MyTasks />*/}
             <Routes>
-              <Route exact path="/projects" element={<Projects user={user} />} />
+              <Route exact path="/" element={<Projects user={user} />} />
               <Route path="/tasks" element={<MyTasks />} />
             </Routes> 
         </div>

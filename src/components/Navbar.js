@@ -14,10 +14,10 @@ const Navbar = ({user, setUser}) => {
           <Image roundedCircle src={corgi} alt="corgi" />
           <Nav variant="pills" defaultActiveKey="/" className="nav flex-column">
               <Nav.Item>
-                <Nav.Link href="/" as={Link} to="/dashboard">Dashboard</Nav.Link>
+                <Nav.Link eventKey="link-1" as={Link} to="/dashboard">Dashboard</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="projects" eventKey="link-1" as={Link} to="/projects">Projects</Nav.Link>
+                <Nav.Link href="/" as={Link} to="/">Projects</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="link-2" as={Link} to="/tasks">My Tasks</Nav.Link>
