@@ -66,15 +66,6 @@ export async function getProjectById(projectId) {
     }
 }
 
-export async function getProjectCountForColumn(userId) {
-    try {
-        const { data } = await axios.get(`/api/users/${userId}/projectCount`)
-        return data
-    } catch (error) {
-        throw error
-    }
-}
-
 export async function addProject({userId, columnId, title, desc}) {
     try {
         const { data } = await axios.post(`api/projects`, {userId, columnId, title, desc})

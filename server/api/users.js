@@ -41,6 +41,15 @@ router.get('/:userId/projectColumns', async (req, res) => {
 
     try {
         const projectColumns = await getColumns({userId})
+        const projectCount = await getProjectCount({userId})
+        projectColumns.map(column => {
+            projectCount.map(count => {
+              if (column.id === count.projectColumnId) {
+                column.count = count.count
+              } 
+            })
+        })
+
         res.send(projectColumns)
     } catch (error) {
         console.error('could not get columns')
@@ -65,17 +74,6 @@ router.get('/:userId/projects', async (req, res) => {
     try {
         const projects = await getProjects({userId})
         res.send(projects)
-    } catch (error) {
-        throw error
-    }
-})
-
-router.get('/:userId/projectCount', async (req, res) => {
-    const { userId } = req.params
-
-    try {
-        const projectCount = await getProjectCount({userId})
-        res.send(projectCount)
     } catch (error) {
         throw error
     }

@@ -6,11 +6,11 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard, getProjectCountForColumn } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard } from '../../utils'
 import NewColumn from './NewColumn'
 import './index.css'
 
-const projectType = props => <h3 className="columnName">({props.count ? props.count : 0}) {props.title}</h3>
+const projectType = props => <h3 className="columnName">({props.count}) {props.title}</h3>
 
 const ProjectColumns = ({user}) => {
     const [projects, setProjects] = useState([])
@@ -27,7 +27,6 @@ const ProjectColumns = ({user}) => {
 
     const [columnId, setColumnId] = useState('')
     const [columns, setColumns] = useState([])
-    const [columnCount, setColumnCount] = useState([])
 
     const [newP, setNewP] = useState(false)
     const [newC, setNewC] = useState(false)
@@ -98,7 +97,7 @@ const ProjectColumns = ({user}) => {
     const handleAddProject = async (userId, columnId, title, desc) => {
       console.log(userId, columnId, projectTitle, projectDesc)
       const newProject = await addProject({userId, columnId, title, desc})
-      console.log('neeeewwww', newProject)
+      console.log('neeeewww', newProject)
 
       if (newProject) {
         await setNewP(true)
@@ -109,10 +108,7 @@ const ProjectColumns = ({user}) => {
 
     useEffect(async () => {
         const projects = await getProjectsByUserId(user.id)
-        const pCount = await getProjectCountForColumn(user.id)
         console.log('inner join', projects)
-        console.log('count dis', pCount)
-        await setColumnCount(pCount)
         await setProjects(projects.reverse())
         //set this so app doesnt crash when it doesnt have initial data
         await setProjectCard(projects[0])
@@ -120,15 +116,6 @@ const ProjectColumns = ({user}) => {
 
     useEffect(async () => {
       const columns = await getColumnsByUserId(user.id)
-      //loops through columns and attaches # of projects under each column since they are pulled from separate API calls
-      columns.map(column => {
-        columnCount.map(count => {
-          if (column.id === count.projectColumnId) {
-            column.count = count.count
-          } 
-        })
-      })
-
       await setColumns(columns)
       console.log('columns', columns)
     }, [newC])
@@ -138,7 +125,7 @@ const ProjectColumns = ({user}) => {
         {columns.map((column) => (
           <div key={column.id} className='column'>
             <div className="titleArea">
-              {projectType({count: column.count, title: column.type})}
+              {projectType({count: (column.count ? column.count : 0), title: column.type})}
                 <Button
                   className="newCardBtn" 
                   variant="primary" 
