@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Form from 'react-bootstrap/Form'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard } from '../../utils'
+import { getProjectsByUserId, getProjectById, addProject, getColumnsByUserId, updateProjectColumn, editProjectCard, deleteProjectCard, deleteColumn } from '../../utils'
 import NewColumn from './NewColumn'
 import './index.css'
 
@@ -106,6 +106,13 @@ const ProjectColumns = ({user}) => {
       }
     }
 
+    const handleDeleteColumn = async (columnId) => {
+      const deleted = await deleteColumn({columnId})
+      console.log('deleted', deleted)
+      await setNewC(true)
+      setNewC(false)
+    }
+
     useEffect(async () => {
         const projects = await getProjectsByUserId(user.id)
         console.log('inner join', projects)
@@ -126,11 +133,16 @@ const ProjectColumns = ({user}) => {
           <div key={column.id} className='column'>
             <div className="titleArea">
               {projectType({count: (column.count ? column.count : 0), title: column.type})}
-                <Button
-                  className="newCardBtn" 
-                  variant="primary" 
-                  onClick={() => {handleShowNewProject(column.id)}}
-                >+</Button>
+              <DropdownButton id="threeDots" title="...">
+                <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Edit Column</Dropdown.Item>
+                <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Delete Column</Dropdown.Item>
+                <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Something else</Dropdown.Item>
+              </DropdownButton>
+              <Button
+                className="newCardBtn" 
+                variant="primary" 
+                onClick={() => {handleShowNewProject(column.id)}}
+              >+</Button>
             </div>
             <div className="scrollDis">
               {projects.map((project) => (

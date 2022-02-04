@@ -52,3 +52,15 @@
     right: 15px;
     bottom: 10px;
 }
+
+#threeDots {
+    background-color: #F1ECE4;
+    color: #834333; 
+    padding-bottom: 22px;
+    font-size: 25px;
+    border: none;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}

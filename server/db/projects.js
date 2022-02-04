@@ -55,6 +55,16 @@ async function editProject({projectId, newTitle, newDesc}) {
     return rows
 }
 
+async function deleteProjectsByColumnId({columnId}) {
+    const { rows } = await client.query(`
+        DELETE FROM projects
+        WHERE "projectColumnId" = ($1)
+        RETURNING *
+    `, [columnId])
+
+    return rows
+}
+
 async function deleteProject({projectId}) {
     const { rows } = await client.query(`
         DELETE FROM projects
@@ -76,6 +86,16 @@ async function updateColumn({projectId, newColumnId}) {
     return rows
 }
 
+async function deleteColumnById({columnId}) {
+    const { rows } = await client.query(`
+        DELETE FROM "projectColumns"
+        WHERE id = ($1)
+        RETURNING *;
+    `, [columnId])
+
+    return rows
+}
+
 module.exports = {
     createProject,
     getProjects,
@@ -83,5 +103,7 @@ module.exports = {
     getProjectCount,
     editProject,
     deleteProject,
-    updateColumn
+    deleteProjectsByColumnId,
+    updateColumn,
+    deleteColumnById
 }

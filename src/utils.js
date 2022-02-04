@@ -38,6 +38,15 @@ export async function addColumn({userId, type}) {
     }
 }
 
+export async function deleteColumn({columnId}) {
+    try {
+        const { data } = await axios.post(`/api/projects/${columnId}`, {columnId})
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
 export async function updateProjectColumn(projectId, newColumnId) {
     try {
         const { data } = await axios.post(`/api/projects/${projectId}/projectColumns`, {projectId, newColumnId})
