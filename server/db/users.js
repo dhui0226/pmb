@@ -46,7 +46,7 @@ async function getColumns({userId}) {
         ORDER BY id ASC
     `, [userId])
 
-    return rows
+    return (rows)
 }
 
 module.exports = {

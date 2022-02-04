@@ -32,6 +32,17 @@ async function getProject({projectId}) {
     return rows
 }
 
+async function getProjectCount({userId}) {
+    const { rows } = await client.query(`
+        SELECT "projectColumnId", COUNT("projectColumnId")
+        FROM projects
+        WHERE "userId" = ($1)
+        GROUP BY "projectColumnId"
+    `, [userId])
+
+    return rows
+}
+
 async function editProject({projectId, newTitle, newDesc}) {
     const { rows } = await client.query(`
         UPDATE projects
@@ -69,6 +80,7 @@ module.exports = {
     createProject,
     getProjects,
     getProject,
+    getProjectCount,
     editProject,
     deleteProject,
     updateColumn
