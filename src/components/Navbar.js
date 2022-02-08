@@ -26,7 +26,7 @@ const Navbar = ({user, setUser}) => {
                 <Nav.Link eventKey="link-3" as={Link} to="/settings">Settings</Nav.Link>
               </Nav.Item>
               <Button 
-                variant="outline-primary"
+                variant="outline-warning"
                 onClick={() => {setUser({})}}
               >Logout</Button>{' '}
           </Nav>

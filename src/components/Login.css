@@ -5,12 +5,32 @@
     background-color: #F1ECE4;
 }
 
-.btn-primary {
+.btn-warning {
     background-color: orange;
     border-color: orange;
+    color: white;
 }
 
-.btn-primary:hover {
+.btn-warning:focus {
+    color: white;
+    background-color: orange;
+    border-color: orange;
+    box-shadow: 0 0 0 0.25rem orange;
+}
+
+.btn-warning:hover {
     background-color: rgb(255, 178, 36);
     border-color: rgb(255, 178, 36);
+    color: white;
+}
+
+.btn-outline-warning {
+    color: #834333;
+    border-color: #834333;
+}
+
+.btn-outline-warning:hover {
+    background-color: orange;
+    border-color: orange;
+    color: white;
 }

@@ -31,13 +31,14 @@ img {
     color: white;
 }
 
-.btn-outline-primary {
+.btn-outline-warning {
     color: #834333;
     border-color: #834333;
     margin: 8px;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-warning:hover {
     background-color: orange;
     border-color: orange;
+    color: white;
 }

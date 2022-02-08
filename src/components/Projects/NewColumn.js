@@ -25,7 +25,7 @@ const NewColumn = ({user, setNewC}) => {
         <div className="newCol">
             <Button 
                 className="newColumnBtn"
-                variant="primary" 
+                variant="warning" 
                 onClick={handleShow}>
               Add Column
             </Button>
@@ -43,7 +43,7 @@ const NewColumn = ({user, setNewC}) => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="primary" onClick={() => {handleSubmit(user.id, columnName)}}>
+                <Button variant="warning" onClick={() => {handleSubmit(user.id, columnName)}}>
                   Add
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>

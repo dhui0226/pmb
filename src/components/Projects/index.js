@@ -133,14 +133,14 @@ const ProjectColumns = ({user}) => {
           <div key={column.id} className='column'>
             <div className="titleArea">
               {projectType({count: (column.count ? column.count : 0), title: column.type})}
-              <DropdownButton id="threeDots" title="...">
+              <DropdownButton id="threeDots" variant="warning" title="...">
                 <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Edit Column</Dropdown.Item>
                 <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Delete Column</Dropdown.Item>
                 <Dropdown.Item onClick={() => {handleDeleteColumn(column.id)}}>Something else</Dropdown.Item>
               </DropdownButton>
               <Button
                 className="newCardBtn" 
-                variant="primary" 
+                variant="warning" 
                 onClick={() => {handleShowNewProject(column.id)}}
               >+</Button>
             </div>
@@ -169,11 +169,11 @@ const ProjectColumns = ({user}) => {
                       </Offcanvas.Title>
                       {/*Edit button*/}
                       <Button 
-                        variant="primary"
+                        variant="warning"
                         size="sm"
                         onClick={() => handleShowEdit(projectCard.title, projectCard.description, 'edit')}
                       >Edit</Button>{' '}
-                      <DropdownButton id="dropdown-basic-button" size="sm" title="Move">
+                      <DropdownButton id="dropdown-basic-button" variant="warning" size="sm" title="Move">
                         {columns.map((column) => (
                           <div key={column.id}>
                             <Dropdown.Item onClick={() => {handleDropdown(projectCard.id, column.id)}}>{column.type}</Dropdown.Item>
@@ -190,12 +190,12 @@ const ProjectColumns = ({user}) => {
                             onChange={(event) => setEditDesc(event.target.value)} />
                           <div className="editBtn">
                             <Button 
-                              variant="primary"
+                              variant="warning"
                               size="sm"
                               onClick={() => {handleEditProject(projectCard.id, editTitle, editDesc)}}
                             >Save</Button>{' '}
                             <Button 
-                              variant="primary"
+                              variant="warning"
                               size="sm"
                               onClick={() => handleShowEdit(null, null, 'cancel')}
                             >Cancel</Button>{' '}
@@ -206,7 +206,7 @@ const ProjectColumns = ({user}) => {
                           {projectCard.description}
                           <Button 
                             className='deleteBtn' 
-                            variant="primary"
+                            variant="warning"
                             onClick={() => handleDelete(projectCard.id)}
                           >Delete</Button>{' '}
                         </div>
@@ -239,7 +239,7 @@ const ProjectColumns = ({user}) => {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="primary" onClick={() => {handleAddProject(user.id, columnId, projectTitle, projectDesc)}}>
+                <Button variant="warning" onClick={() => {handleAddProject(user.id, columnId, projectTitle, projectDesc)}}>
                   Add
                 </Button>
                 <Button variant="secondary" onClick={handleCloseNewProject}>

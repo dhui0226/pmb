@@ -59,13 +59,12 @@ const Login = ({setUser}) => {
                   </FloatingLabel>
                 </Form.Group>
                 <Button 
-                  variant="outline-primary"
-                  className="o-primary-btn"
+                  variant="outline-warning"
                   onClick={() => {
                     handleSubmit(event, 'login')
                   }}>Login</Button>{' '}
                 <Button 
-                  variant="primary" 
+                  variant="warning"
                   onClick={handleShow}
                 >Sign Up</Button>
               </Form>
@@ -100,7 +99,7 @@ const Login = ({setUser}) => {
           </Modal.Body>
           <Modal.Footer>
             <Button 
-              variant="primary"
+              variant="warning"
               onClick={() => {handleSubmit(event, 'register')}}>Sign Up</Button>
             <Button variant="secondary" onClick={handleClose}>
               Cancel
