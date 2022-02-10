@@ -25,10 +25,10 @@ server.use(cors())
 server.use(express.json())
 server.use(morgan('tiny'))
 
-/*server.get('/', (req, res) => {
+server.get('/', (req, res) => {
     console.log('server is working')
     res.send({message: 'server get'})
-})*/
+})
 
 server.use('/api', apiRouter)
 
