@@ -12,23 +12,23 @@ client.connect()
 
 server.use(express.static(publicPath));
 
-/*server.get('*', (req, res) => {
+server.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
-});*/
+});
 
- server.get('/', (req, res) => {
+/*server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.js'))
   // res.send({message: 'testing'})
-})
+})*/
 
 server.use(cors())
 server.use(express.json())
 server.use(morgan('tiny'))
 
-server.get('/', (req, res) => {
+/*server.get('/', (req, res) => {
     console.log('server is working')
     res.send({message: 'server get'})
-})
+})*/k
 
 server.use('/api', apiRouter)
 
