@@ -10,14 +10,15 @@ const morgan = require('morgan')
 
 client.connect()
 
-server.use(express.static('../build'));
+server.use(express.static(publicPath));
 
 /*server.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });*/
 
-server.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.js'))
+ server.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.js'))
+  // res.send({message: 'testing'})
 })
 
 server.use(cors())
