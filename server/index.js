@@ -28,7 +28,7 @@ server.use(morgan('tiny'))
 /*server.get('/', (req, res) => {
     console.log('server is working')
     res.send({message: 'server get'})
-})*/k
+})*/
 
 server.use('/api', apiRouter)
 
