@@ -13,7 +13,7 @@ client.connect()
 server.use(express.static(publicPath));
 
 server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.js'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 /*server.get('/', (req, res) => {
