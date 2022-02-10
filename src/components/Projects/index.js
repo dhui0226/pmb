@@ -128,9 +128,9 @@ const ProjectColumns = ({user}) => {
     }, [newC])
 
     return (
-      <div className='projectThing'>
+      <div className="allColumns">
         {columns.map((column) => (
-          <div key={column.id} className='column'>
+          <div key={column.id} className="column">
             <div className="titleArea">
               {projectType({count: (column.count ? column.count : 0), title: column.type})}
               <DropdownButton id="threeDots" variant="warning" title="...">
@@ -144,7 +144,7 @@ const ProjectColumns = ({user}) => {
                 onClick={() => {handleShowNewProject(column.id)}}
               >+</Button>
             </div>
-            <div className="scrollDis">
+            <div className="allCards">
               {projects.map((project) => (
                 (project.projectColumnId === column.id) ? <div key={project.id}>
                   <Card style={{ cursor: "pointer" }} onClick={() => {handleShow(project.id)}}>

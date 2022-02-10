@@ -1,8 +1,6 @@
 import Navbar from './Navbar'
-import Dashboard from './Dashboard'
 import Projects from './Projects'
-import MyTasks from './MyTasks'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './Home.css'
 
 const Home = ({user, setUser}) => {
@@ -11,7 +9,7 @@ const Home = ({user, setUser}) => {
             <Navbar user={user} setUser={setUser} />
             <Routes>
               <Route exact path="/" element={<Projects user={user} />} />
-              <Route path="/tasks" element={<MyTasks />} />
+              {/*<Route path="/tasks" element={<MyTasks />} />*/}
             </Routes> 
         </div>
     )

@@ -2,7 +2,7 @@
     width: 18rem;
 }
 
-.projectThing {
+.allColumns {
     color: #834333;
     display: flex;
     /*border: solid yellow 3px;*/
@@ -23,7 +23,7 @@
     /*border: solid blue 3px;*/
 }
 
-.scrollDis {
+.allCards {
     overflow-y: auto;
     height: 100vh;
     /*border: solid red 3px;*/
