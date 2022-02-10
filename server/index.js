@@ -10,13 +10,13 @@ const morgan = require('morgan')
 
 client.connect()
 
-server.use(express.static(publicPath));
+server.use(express.static('../build'));
 
-server.get('*', (req, res) => {
+/*server.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
- });
+});*/
 
- server.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.js'))
 })
 
