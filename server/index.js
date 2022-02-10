@@ -12,10 +12,6 @@ client.connect()
 
 server.use(express.static(publicPath));
 
-server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 /*server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.js'))
   // res.send({message: 'testing'})
@@ -31,6 +27,10 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api', apiRouter)
+
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`)
