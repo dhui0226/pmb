@@ -16,6 +16,10 @@ server.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
  });
 
+ server.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.js'))
+})
+
 server.use(cors())
 server.use(express.json())
 server.use(morgan('tiny'))
