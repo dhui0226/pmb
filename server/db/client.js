@@ -1,4 +1,8 @@
 const { Client } = require('pg')
-const client = new Client('https://localhost:5432/pms')
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/pms'
+const client = new Client({
+    connectionString,
+    ssl: { rejectUnauthorized: false }
+})
 
 module.exports = client
