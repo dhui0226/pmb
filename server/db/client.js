@@ -8,11 +8,3 @@ const client = new Client({
 })
 
 module.exports = client
-
-/*let config = { connectionString }
-
-const client = new Client({config})
-
-if (process.env.DATABASE_URL) {
-    config.ssl = { rejectUnauthorized: false }
-}*/ 
