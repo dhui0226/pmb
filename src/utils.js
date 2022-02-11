@@ -89,6 +89,7 @@ export async function editProjectCard({projectId, newTitle, newDesc}) {
         const { data } = await axios.post(`/api/projects/${projectId}`, {projectId, newTitle, newDesc})
         return data
     } catch (error) {
+        console.error('edit utils section')
         throw error
     }
 }

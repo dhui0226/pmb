@@ -56,6 +56,7 @@ router.post('/:projectId', async (req, res) => {
         const project = await editProject({projectId, newTitle, newDesc})
         res.send(project)
     } catch (error) {
+        console.error('edit api section')
         throw error
     }
 })
