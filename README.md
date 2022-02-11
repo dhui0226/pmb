@@ -1,10 +1,10 @@
-# Project Manager
+# Project Management Board
 
 A project board for managing tasks that utilizes the PERN stack. Users can customize boards to section off tasks based on their priority/nature.
 
 ## Motivation
 
-I started this project to satisfy my curiosity at behind the scenes of apps that I use such as Huntr
+I started this project to satisfy my curiosity at behind the scenes of apps that I use such as Huntr.
 
 ## Project Status
 
