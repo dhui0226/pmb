@@ -1,12 +1,21 @@
+const path = require('path');
 const express = require('express')
 const server = express()
-const port = 4000
+const publicPath = path.join(__dirname, 'build');
+const port = process.env.PORT || 4000
 const { client } = require('./db')
 const apiRouter = require('./api')
 const cors = require('cors')
 const morgan = require('morgan')
 
 client.connect()
+
+server.use(express.static(publicPath));
+
+/*server.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.js'))
+  // res.send({message: 'testing'})
+})*/
 
 server.use(cors())
 server.use(express.json())
@@ -18,6 +27,10 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api', apiRouter)
+
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`)

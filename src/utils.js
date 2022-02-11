@@ -40,7 +40,7 @@ export async function addColumn({userId, type}) {
 
 export async function deleteColumn({columnId}) {
     try {
-        const { data } = await axios.post(`/api/projects/${columnId}`, {columnId})
+        const { data } = await axios.post(`/api/projects/${columnId}/delete`, {columnId})
         return data
     } catch (error) {
         throw error
@@ -86,9 +86,10 @@ export async function addProject({userId, columnId, title, desc}) {
 
 export async function editProjectCard({projectId, newTitle, newDesc}) {
     try {
-        const { data } = await axios.post(`/api/projects/${projectId}`, {projectId, newTitle, newDesc})
+        const { data } = await axios.post(`/api/projects/${projectId}/edit`, {projectId, newTitle, newDesc})
         return data
     } catch (error) {
+        console.error('edit utils section')
         throw error
     }
 }
