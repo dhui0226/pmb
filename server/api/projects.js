@@ -37,7 +37,7 @@ router.post('/:projectId/projectColumns', async (req, res) => {
     }
 })
 
-router.post('/:columnId', async (req, res) => {
+router.post('/:columnId/delete', async (req, res) => {
     const { columnId } = req.body
 
     try {
@@ -49,7 +49,7 @@ router.post('/:columnId', async (req, res) => {
     }
 })
 
-router.post('/:projectId', async (req, res) => {
+router.post('/:projectId/edit', async (req, res) => {
     const { projectId, newTitle, newDesc } = req.body
 
     try {
