@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.54008889.css",
-    "main.js": "/static/js/main.203d1009.js",
+    "main.js": "/static/js/main.314142a6.js",
     "static/media/shiba.png": "/static/media/shiba.4ffc145bd9d87276eea8.png",
     "index.html": "/index.html",
     "main.54008889.css.map": "/static/css/main.54008889.css.map",
-    "main.203d1009.js.map": "/static/js/main.203d1009.js.map"
+    "main.314142a6.js.map": "/static/js/main.314142a6.js.map"
   },
   "entrypoints": [
     "static/css/main.54008889.css",
-    "static/js/main.203d1009.js"
+    "static/js/main.314142a6.js"
   ]
 }
